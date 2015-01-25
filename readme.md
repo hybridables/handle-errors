@@ -9,6 +9,19 @@ npm test
 ```
 
 
+## Related
+- [hybridables][hybridables]
+- [hybridify][hybridify]
+- [hybridify-all][hybridify-all]
+- [handle-errors][handle-errors]
+- [handle-callback][handle-callback]
+- [handle-arguments][handle-arguments]
+- [callback-and-promise][callback-and-promise]
+- [thenify-all][thenify-all]
+- [thenify][thenify]
+- [thenables][thenables]
+
+
 ## Usage
 > For more use-cases see the [tests](./test.js)
 
@@ -21,15 +34,7 @@ handleErrors.type(msg[, cb]) //=> throw new TypeError(msg)
 handleErrors.error('should have arguments')
 //=> Error: pkgName: should have arguments
 ```
-
-
-## Related
-- [thenify](https://github.com/thenables/thenify)
-- [thenify-all](https://github.com/thenables/thenify-all)
-- [callback-and-promise](https://github.com/thenables/callback-and-promise)
-- [thenables org](https://github.com/thenables)
-- [handle-callback](https://github.com/tunnckoCore/handle-callback) - or as I call it _"promise to hybrid"_
-- [handle-arguments](https://github.com/tunnckoCore/handle-arguments)
+> Methods are chainable, so if callback given you can chain them.
 
 
 ## Author
@@ -71,4 +76,15 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [kdf](https://github.com/tunnckoCore), January 25, 2015_
+_Powered and automated by [kdf](https://github.com/tunnckoCore), January 26, 2015_
+
+[callback-and-promise]: https://github.com/thenables/callback-and-promise
+[thenify-all]: https://github.com/thenables/thenify-all
+[thenify]: https://github.com/thenables/thenify
+[thenables]: https://github.com/thenables
+[hybridables]: https://github.com/hybridables
+[hybridify]: https://github.com/tunnckoCore/hybridify
+[hybridify-all]: https://github.com/tunnckoCore/hybridify-all
+[handle-callback]: https://github.com/tunnckoCore/handle-callback
+[handle-arguments]: https://github.com/tunnckoCore/handle-arguments
+[handle-errors]: https://github.com/tunnckoCore/handle-errors

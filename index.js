@@ -11,11 +11,15 @@ var path = require('path');
 var fmt = require('util').format;
 
 module.exports = function handleErrors(name) {
-  if (!(this instanceof HandleErrors)) return new HandleErrors(name);
+  if (!(this instanceof HandleErrors)) {
+    return new HandleErrors(name);
+  }
+  return this;
 };
 
 function HandleErrors(name) {
   this.label = name;
+  return this;
 }
 
 HandleErrors.prototype.error = function newError(err, callback) {
@@ -25,6 +29,7 @@ HandleErrors.prototype.error = function newError(err, callback) {
     throw err;
   }
   callback(err);
+  return this;
 };
 
 HandleErrors.prototype.type = function newTypeError(err, callback) {
@@ -34,5 +39,6 @@ HandleErrors.prototype.type = function newTypeError(err, callback) {
     throw err;
   }
   callback(err);
+  return this;
 };
 
