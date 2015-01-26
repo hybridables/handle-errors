@@ -10,35 +10,29 @@
 var path = require('path');
 var fmt = require('util').format;
 
-module.exports = function handleErrors(name) {
-  if (!(this instanceof HandleErrors)) {
-    return new HandleErrors(name);
+module.exports = function handleErrors(label) {
+  return {
+    error: newError,
+    type: newTypeError
+  };
+
+  function newError(err, cb) {
+    err = new Error(fmt('%s: %s', label, err));
+
+    if (!cb) {
+      throw err;
+    }
+
+    return cb(err);
   }
-  return this;
-};
 
-function HandleErrors(name) {
-  this.label = name;
-  return this;
-}
+  function newTypeError(err, cb) {
+    err = new TypeError(fmt('%s: %s', label, err));
 
-HandleErrors.prototype.error = function newError(err, callback) {
-  err = fmt('%s: %s', this.label, err.toString());
-  err = new Error(err);
-  if (!callback) {
-    throw err;
+    if (!cb) {
+      throw err;
+    }
+
+    return cb(err);
   }
-  callback(err);
-  return this;
 };
-
-HandleErrors.prototype.type = function newTypeError(err, callback) {
-  err = fmt('%s: %s', this.label, err.toString());
-  err = new TypeError(err);
-  if (!callback) {
-    throw err;
-  }
-  callback(err);
-  return this;
-};
-
