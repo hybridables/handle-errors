@@ -1,11 +1,43 @@
 ## [![npm][npmjs-img]][npmjs-url] [![mit license][license-img]][license-url] [![build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![deps status][daviddm-img]][daviddm-url]
 
-> Handling/creating hybrid errors, if callback pass to it else throw
+> Handling/creating hybrid errors. Hybrid middleware between callbacks and throws.  
+> Helpful util for modules that have [hybrid APIs][hybridify] and want when they use [promises][gitclone], directly to throw the errors; when use callbacks to pass errors to first argument of this callback.
 
 ## Install
-```bash
-npm install handle-errors
+```
+npm i --save handle-errors
 npm test
+```
+
+
+## API
+> For more use-cases see the [tests](./test.js)
+
+### [handleErrors](./index.js#L44)
+> Useful when you have [hybrid api][hybridify] like [gitclone][gitclone]. If you work with promises then you will want to throw the errors, when callback is in use will handle it in 1st argument.
+
+- `label` **{String}** some marker (package name?)
+- `stack` **{Boolean}** when `true` adds `.shortStack` property to the error object 
+- `return` **{Error|TypeError}** throws it or return `callback` function
+
+**Example:**
+
+```js
+var handleErrors = require('handle-errors')('my-pkg'/*, true*/);
+
+handleErrors.error('some err message here');
+//=> throws 'Error: [my-pkg] some error message here'
+
+function _cb(err) {
+  // err instanceof Error
+  console.log(err.toString());
+  //=> 'Error: [my-pkg] some error message here'
+
+  console.log(err.shortStack);
+  //=> undefined
+}
+
+handleErrors.error('some err message here', _cb);
 ```
 
 
@@ -13,28 +45,15 @@ npm test
 - [hybridables][hybridables]
 - [hybridify][hybridify]
 - [hybridify-all][hybridify-all]
-- [handle-errors][handle-errors]
+- [then-got][then-got]
+- [gitclone][gitclone]
+- [gitclone-cli][gitclone-cli]
 - [handle-callback][handle-callback]
 - [handle-arguments][handle-arguments]
 - [callback-and-promise][callback-and-promise]
 - [thenify-all][thenify-all]
 - [thenify][thenify]
 - [thenables][thenables]
-
-
-## Usage
-> For more use-cases see the [tests](./test.js)
-
-```js
-var handleErrors = require('handle-errors')('pkgName');
-
-handleErrors.error(msg[, cb]) //=> throw new Error(msg)
-handleErrors.type(msg[, cb]) //=> throw new TypeError(msg)
-
-handleErrors.error('should have arguments')
-//=> Error: pkgName: should have arguments
-```
-> Methods are chainable, so if callback given you can chain them.
 
 
 ## Author
@@ -64,7 +83,7 @@ Released under the [`MIT`][license-url] license.
 [travis-img]: https://img.shields.io/travis/hybridables/handle-errors.svg?style=flat
 
 [daviddm-url]: https://david-dm.org/hybridables/handle-errors
-[daviddm-img]: https://img.shields.io/david/hybridables/handle-errors.svg?style=flat
+[daviddm-img]: https://img.shields.io/david/dev/hybridables/handle-errors.svg?style=flat
 
 [author-gratipay]: https://gratipay.com/tunnckoCore
 [author-twitter]: https://twitter.com/tunnckoCore
@@ -76,7 +95,7 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [kdf](https://github.com/tunnckoCore), January 26, 2015_
+_Powered and automated by [kdf](https://github.com/tunnckoCore), January 30, 2015_
 
 [callback-and-promise]: https://github.com/thenables/callback-and-promise
 [thenify-all]: https://github.com/thenables/thenify-all
@@ -88,3 +107,6 @@ _Powered and automated by [kdf](https://github.com/tunnckoCore), January 26, 201
 [handle-callback]: https://github.com/hybridables/handle-callback
 [handle-arguments]: https://github.com/hybridables/handle-arguments
 [handle-errors]: https://github.com/hybridables/handle-errors
+[gitclone]: https://github.com/tunnckoCore/gitclone
+[gitclone-cli]: https://github.com/tunnckoCore/gitclone-cli
+[then-got]: https://github.com/hybridables/then-got

@@ -10,6 +10,37 @@
 var path = require('path');
 var fmt = require('util').format;
 
+/**
+ * > Useful when you have [hybrid api][hybridify] like [gitclone][gitclone].
+ * If you work with promises then you will want to throw the errors,
+ * when callback is in use will handle it in 1st argument.
+ *
+ * **Example:**
+ *
+ * ```js
+ * var handleErrors = require('handle-errors')('my-pkg');
+ *
+ * handleErrors.error('some err message here');
+ * //=> throws 'Error: [my-pkg] some error message here'
+ *
+ * function _cb(err) {
+ *   // err instanceof Error
+ *   console.log(err.toString());
+ *   //=> 'Error: [my-pkg] some error message here'
+ *
+ *   console.log(err.shortStack);
+ *   //=> undefined
+ * }
+ *
+ * handleErrors.error('some err message here', _cb);
+ * ```
+ *
+ * @name handleErrors
+ * @param  {String} `label` some marker (package name?)
+ * @param  {Boolean} `stack` when `true` adds `.shortStack` property to the error object
+ * @return {Error|TypeError} throws it or return `callback` function
+ * @api public
+ */
 module.exports = function handleErrors(label, stack) {
   checkType(label, 'label');
 
