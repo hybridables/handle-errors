@@ -17,7 +17,26 @@
     "type": "git",
     "url": "git://github.com/hybridables/handle-errors.git"
   },
-  "keywords": [],
+  "keywords": [
+    "api",
+    "apis",
+    "aplus",
+    "callback",
+    "callbacks",
+    "catch",
+    "cb",
+    "err",
+    "error",
+    "errors",
+    "handle",
+    "hybrid",
+    "hybridify",
+    "promise",
+    "promises",
+    "promises-aplus",
+    "then",
+    "throw"
+  ],
   "license": {
     "type": "MIT",
     "url": "https://github.com/hybridables/handle-errors/blob/master/license.md"
